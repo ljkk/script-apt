@@ -1,0 +1,20 @@
+[Unit]
+Description=Zabbix Proxy
+After=syslog.target
+After=network.target
+After=mysql.service
+After=mysqld.service
+After=mariadb.service
+
+[Service]
+Type=forking
+Restart=on-failure
+PIDFile=/usr/local/zabbix/run/zabbix_proxy.pid
+KillMode=control-group
+ExecStart=/usr/local/zabbix/sbin/zabbix_proxy -c /usr/local/zabbix/etc/zabbix_proxy.conf
+ExecStop=/bin/kill -SIGTERM $MAINPID
+RestartSec=10s
+TimeoutSec=infinity
+
+[Install]
+WantedBy=multi-user.target

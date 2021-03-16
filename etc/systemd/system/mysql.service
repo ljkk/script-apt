@@ -1,0 +1,20 @@
+[Unit]
+Description=MySQL Server
+After=network.target syslog.target
+
+[Service]
+User=mysql
+Group=mysql
+PermissionsStartOnly=true
+
+Type=forking
+
+ExecStart=/etc/init.d/mysql start
+ExecStop=/etc/init.d/mysql stop
+ExecReload=/etc/init.d/mysql reload
+
+Restart=no
+PrivateTmp=false
+
+[Install]
+WantedBy=multi-user.target
