@@ -14,7 +14,7 @@ install_bin() {
         sed -i "s@^datadir=.*@datadir=${data_dir}@" ${install_dir}/support-files/mysql.server
     fi
     echo "$install_dir/lib" >/etc/ld.so.conf.d/mysql.conf
-    }
+}
 
 # 编译安装
 install_com() {
@@ -24,7 +24,7 @@ install_com() {
     _tar $package_2 -C $package_2_dir || exit 1
     pushd $package_2_dir >/dev/null
     _mkdir build
-    pushd ./build >/dev/null  
+    pushd ./build >/dev/null
     cmake_options="-DCMAKE_INSTALL_PREFIX=${install_dir} \
     -DMYSQL_DATADIR=${data_dir} \
     -DDOWNLOAD_BOOST=1 \
@@ -177,7 +177,7 @@ my_cnf() {
     sort-buffer-size=8M
     read-buffer=4M
     write-buffer=4M
-    EOF
+EOF
     Mem=$(mem)
     if [[ ${Mem} -gt 1024 && ${Mem} -lt 2048 ]]; then
         sed -i "s#^key_buffer_size.*#key_buffer_size = 32M#" /etc/my.cnf
